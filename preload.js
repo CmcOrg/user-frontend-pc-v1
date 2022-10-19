@@ -19,6 +19,4 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 // 它拥有与Chrome扩展一样的沙盒。
 window.addEventListener('DOMContentLoaded', () => {
 
-    // window.localStorage.setItem('showTitleBar', true)
-
 })
