@@ -1,12 +1,12 @@
 // preload.js
 const {contextBridge, ipcRenderer} = require('electron')
 
-// 向渲染进程传递参数
+// 渲染进程（html）给主进程发送消息
 contextBridge.exposeInMainWorld('ipcRenderer', {
     send(channel, data) {
         ipcRenderer.send(channel, data)
     },
-    // 同步发送消息：通过：ipcMain.event.returnValue传递返回值
+    // 同步发送消息给主进程：主进程通过：ipcMain.event.returnValue 传递返回值
     sendSync(channel, data) {
         return ipcRenderer.sendSync(channel, data)
     },
@@ -19,6 +19,6 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 // 它拥有与Chrome扩展一样的沙盒。
 window.addEventListener('DOMContentLoaded', () => {
 
-    window.localStorage.setItem('showTitleBar', true)
+    // window.localStorage.setItem('showTitleBar', true)
 
 })
