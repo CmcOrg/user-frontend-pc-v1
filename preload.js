@@ -1,4 +1,3 @@
-// preload.js
 const {contextBridge, ipcRenderer} = require('electron')
 
 // 渲染进程（html）给主进程发送消息
@@ -10,8 +9,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     sendSync(channel, data) {
         return ipcRenderer.sendSync(channel, data)
     },
-    on(channel, callback) {
-        ipcRenderer.on(channel, callback)
+    on(channel, listener) {
+        ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererEvent, ...args any[] )
     }
 })
 
