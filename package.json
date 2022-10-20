@@ -2,7 +2,11 @@
   "name": "user-frontend-pc-game-v1",
   "private": true,
   "version": "0.0.0",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
+    "game-pc-start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^21.2.0"
   }
 }
