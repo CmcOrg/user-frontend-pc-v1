@@ -1,2 +1,2 @@
-# user-frontend-pc-game-v1
-用户-前端-pc-game-v1
+# user-frontend-pc-v1
+用户-前端-pc-v1
