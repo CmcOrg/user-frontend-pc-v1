@@ -30,12 +30,15 @@ exports.init = ({ipcMain, mainWindow}) => {
         mainWindow.close()
     })
 
-    // 异步
+    // 异步，需要添加 listener：
+    //      ipcRenderer.on('async-reply', (event, args) => {
+    //          console.log('args', args)
+    //      })
     // ipcMain.on('async-message', (event, arg) => {
-    //     event.reply('asynchronous-reply', 'pong')
+    //     event.reply('async-reply', 'pong')
     // })
 
-    // 同步
+    // 同步：ipcRenderer.sendSync('sync-message')，结果为：'pong'
     // ipcMain.on('sync-message', (event, arg) => {
     //     event.returnValue = 'pong'
     // })
