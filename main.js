@@ -16,11 +16,11 @@ const createWindow = () => {
     })
 
     if (app.isPackaged) {
-        mainWindow.loadURL('http://42.192.38.156/suancai-boot')
+        mainWindow.loadURL('https://cmc6.vip/')
     } else {
         // 打开开发工具
         mainWindow.webContents.openDevTools()
-        mainWindow.loadURL('http://localhost:7555')
+        mainWindow.loadURL('http://localhost:15173/')
     }
 
     ipcMainUtil.init({ipcMain, mainWindow}) // 初始化 ipcMain
