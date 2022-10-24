@@ -3,16 +3,16 @@ const {contextBridge, ipcRenderer} = require('electron')
 // 渲染进程（html）给主进程发送消息
 contextBridge.exposeInMainWorld('ipcRenderer', {
     // 需要使用：ipcRenderer.on(channel, listener)，才可以拿到返回值
-    send(channel, ...args) {
-        ipcRenderer.send(channel, args)
+    send(channel, data) {
+        ipcRenderer.send(channel, data)
     },
     // // 同步发送消息给主进程：主进程通过：ipcMain.event.returnValue 传递返回值，不推荐使用
     // sendSync(channel, ...args) {
     //     return ipcRenderer.sendSync(channel, args)
     // },
     // 使用：.then，即可拿到返回值
-    invoke(channel, ...args) {
-        return ipcRenderer.invoke(channel, args)
+    invoke(channel, data) {
+        return ipcRenderer.invoke(channel, data)
     },
     on(channel, listener) {
         ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererevent, argArr any[] )
