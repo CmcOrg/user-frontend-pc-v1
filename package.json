@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "main": "main.js",
   "scripts": {
-    "user-frontend-pc-v1-start": "electron ."
+    "user-frontend-pc-v1-start": "chcp 65001 && electron ."
   },
   "devDependencies": {
     "electron": "^21.2.0"
