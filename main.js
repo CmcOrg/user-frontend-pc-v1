@@ -1,4 +1,4 @@
-const ipcMainUtil = require('./ipcMainUtil')
+const ipcMainUtil = require('./electron/ipcMainUtil')
 const {app, BrowserWindow, ipcMain} = require('electron')
 const path = require('path')
 
@@ -7,7 +7,7 @@ const createWindow = () => {
         minWidth: 1200,
         minHeight: 900,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './electron/preload.js')
         },
         frame: false, // 去掉默认的标题栏
         titleBarStyle: 'customButtonsOnHover', // 隐藏mac左上角的红绿灯
