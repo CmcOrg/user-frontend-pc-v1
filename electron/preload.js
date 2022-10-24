@@ -15,7 +15,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
         return ipcRenderer.invoke(channel, args)
     },
     on(channel, listener) {
-        ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererEvent, ...args any[] )
+        ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererevent, argArr any[] )
     }
 })
 
