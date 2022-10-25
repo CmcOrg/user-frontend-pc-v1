@@ -1,45 +1,45 @@
 // 初始化 ipcMain
 exports.init = ({ipcMain, mainWindow}) => {
 
-    mainWindow.on('resize', () => {
-        mainWindow.webContents.send('isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
+    mainWindow.on('electron:resize', () => {
+        mainWindow.webContents.send('electron:isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
     })
 
     // 发送：是否是最大化
-    ipcMain.on('isMaximized', (event, data) => {
-        event.reply('isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
+    ipcMain.on('electron:isMaximized', (event, data) => {
+        event.reply('electron:isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
     })
 
     // 最小化
-    ipcMain.on('minimize', (event, data) => {
+    ipcMain.on('electron:minimize', (event, data) => {
         mainWindow.minimize()
     })
 
     // 最大化
-    ipcMain.on('maximize', (event, data) => {
+    ipcMain.on('electron:maximize', (event, data) => {
         mainWindow.maximize()
     })
 
     // 取消最大化
-    ipcMain.on('unmaximize', (event, data) => {
+    ipcMain.on('electron:unmaximize', (event, data) => {
         mainWindow.unmaximize()
     })
 
     // 关闭
-    ipcMain.on('close', (event, data) => {
+    ipcMain.on('electron:close', (event, data) => {
         mainWindow.close()
     })
 
     // 异步，需要添加 listener：
-    //      ipcRenderer.on('async-reply', (event, data) => {
-    //          console.log('args', data)
+    //      ipcRenderer.on('electron:async-reply', (event, data) => {
+    //          console.log('data', data)
     //      })
-    // ipcMain.on('async-message', (event, data) => {
-    //     event.reply('async-reply', 'pong')
+    // ipcMain.on('electron:async-message', (event, data) => {
+    //     event.reply('electron:async-reply', 'pong')
     // })
 
-    // 同步：ipcRenderer.sendSync('sync-message')，结果为：'pong'
-    // ipcMain.on('sync-message', (event, data) => {
+    // 同步：ipcRenderer.sendSync('electron:sync-message')，结果为：'pong'
+    // ipcMain.on('electron:sync-message', (event, data) => {
     //     event.returnValue = 'pong'
     // })
 

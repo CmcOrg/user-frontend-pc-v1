@@ -7,15 +7,15 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
         ipcRenderer.send(channel, data)
     },
     // // 同步发送消息给主进程：主进程通过：ipcMain.event.returnValue 传递返回值，不推荐使用
-    // sendSync(channel, ...args) {
-    //     return ipcRenderer.sendSync(channel, args)
+    // sendSync(channel, data) {
+    //     return ipcRenderer.sendSync(channel, data)
     // },
     // 使用：.then，即可拿到返回值
     invoke(channel, data) {
         return ipcRenderer.invoke(channel, data)
     },
     on(channel, listener) {
-        ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererevent, argArr any[] )
+        ipcRenderer.on(channel, listener) // listener 是一个 Function：( event IpcRendererevent, data any )
     }
 })
 
@@ -23,8 +23,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 // 它拥有与Chrome扩展一样的沙盒。
 window.addEventListener('DOMContentLoaded', () => {
 
-    // ipcRenderer.on('async-reply', (event, args) => {
-    //     console.log('args', args)
+    // ipcRenderer.on('electron:async-reply', (event, data) => {
+    //     console.log('data', data)
     // })
 
 })
