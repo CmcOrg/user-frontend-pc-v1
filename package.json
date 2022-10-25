@@ -5,7 +5,7 @@
   "scripts": {
     "build": "tsc",
     "user-frontend-pc-v1-watch": "tsc -w",
-    "user-frontend-pc-v1-start": "npm run build && electron ./dist/main.js"
+    "user-frontend-pc-v1-start": "npm run build && chcp 65001 && electron ./dist/main.js"
   },
   "devDependencies": {
     "electron": "^21.2.0",
