@@ -1,12 +1,14 @@
 {
   "name": "user-frontend-pc-v1",
-  "private": true,
-  "version": "0.0.0",
-  "main": "main.js",
+  "version": "1.0.0",
   "scripts": {
-    "user-frontend-pc-v1-start": "chcp 65001 && electron ."
+    "build": "tsc",
+    "user-frontend-pc-v1-watch": "tsc -w",
+    "user-frontend-pc-v1-start": "npm run build && electron ./dist/main.js"
   },
   "devDependencies": {
-    "electron": "^21.2.0"
-  }
+    "electron": "^21.2.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {}
 }

@@ -1,7 +1,9 @@
-// 初始化 ipcMain
-exports.init = ({ipcMain, mainWindow}) => {
+import {BrowserWindow, IpcMain} from "electron"
 
-    mainWindow.on('electron:resize', () => {
+// ipcMainUtil
+export default (ipcMain: IpcMain, mainWindow: BrowserWindow) => {
+
+    mainWindow.on('resize', () => {
         mainWindow.webContents.send('electron:isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
     })
 
