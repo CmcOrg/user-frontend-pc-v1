@@ -1,11 +1,11 @@
-import {app, BrowserWindow, ipcMain} from "electron";
+import {app, BrowserWindow} from "electron";
 import * as path from "path";
-import ipcMainUtil from "./electron/ipcMainUtil";
+import electron from "./electron/electron";
 
 function createWindow() {
     const mainWindow = new BrowserWindow({
         minWidth: 800,
-        minHeight: 600,
+        minHeight: 900,
         webPreferences: {
             preload: path.join(__dirname, "./electron/preload.js"),
         },
@@ -21,7 +21,7 @@ function createWindow() {
         mainWindow.loadURL('http://localhost:15173/')
     }
 
-    ipcMainUtil(ipcMain, mainWindow); // 初始化：ipcMain
+    electron(mainWindow); // 初始化：electron
 
 }
 
