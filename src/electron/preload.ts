@@ -9,7 +9,7 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     send(channel: string, data?: any) {
         ipcRenderer.send(channel, data)
     },
-    // 使用：.then，即可拿到返回值
+    // 使用：.then，即可拿到返回值，备注：要使用：ipcMain.handle 才行
     invoke(channel: string, data?: any) {
         return ipcRenderer.invoke(channel, data)
     },

@@ -1,48 +1,52 @@
-import {BrowserWindow, ipcMain} from "electron"
+import {BrowserWindow, ipcMain, IpcMainEvent} from "electron"
+import {TElectronChannel} from "./channel"
 
 // electron
 export default (mainWindow: BrowserWindow) => {
 
+    // 发送：是否是最大化
     mainWindow.on('resize', () => {
-        mainWindow.webContents.send('electron:isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
+        mainWindowWebContentsSend(mainWindow, 'electron:isMaximized', mainWindow.isMaximized())
     })
 
     // 发送：是否是最大化
-    ipcMain.on('electron:isMaximized', (event, data) => {
-        event.reply('electron:isMaximized', mainWindow.isMaximized()) // 发送：是否是最大化
+    ipcMainOn('electron:isMaximized', (event, data) => {
+        eventReply(event, 'electron:isMaximized', mainWindow.isMaximized())
     })
 
     // 最小化
-    ipcMain.on('electron:minimize', (event, data) => {
+    ipcMainOn('electron:minimize', (event, data) => {
         mainWindow.minimize()
     })
 
     // 最大化
-    ipcMain.on('electron:maximize', (event, data) => {
+    ipcMainOn('electron:maximize', (event, data) => {
         mainWindow.maximize()
     })
 
     // 取消最大化
-    ipcMain.on('electron:unmaximize', (event, data) => {
+    ipcMainOn('electron:unmaximize', (event, data) => {
         mainWindow.unmaximize()
     })
 
     // 关闭
-    ipcMain.on('electron:close', (event, data) => {
+    ipcMainOn('electron:close', (event, data) => {
         mainWindow.close()
     })
 
-    // 异步，需要添加 listener：
-    //      ipcRenderer.on('electron:async-reply', (event, data) => {
-    //          console.log('data', data)
-    //      })
-    // ipcMain.on('electron:async-message', (event, data) => {
-    //     event.reply('electron:async-reply', 'pong')
-    // })
+}
 
-    // 同步：ipcRenderer.sendSync('electron:sync-message')，结果为：'pong'
-    // ipcMain.on('electron:sync-message', (event, data) => {
-    //     event.returnValue = 'pong'
-    // })
+// 给 ipcMain 添加 listener
+export function ipcMainOn(channel: TElectronChannel, listener: (event: IpcMainEvent, data?: any) => void) {
+    ipcMain.on(channel, listener)
+}
 
+// mainWindow.webContents.send，作用类似于：event.reply
+export function mainWindowWebContentsSend(mainWindow: BrowserWindow, channel: TElectronChannel, data?: any) {
+    mainWindow.webContents.send(channel, data)
+}
+
+// event.reply
+export function eventReply(event: IpcMainEvent, channel: TElectronChannel, data: any) {
+    event.reply(channel, data)
 }
