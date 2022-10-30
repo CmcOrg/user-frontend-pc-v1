@@ -5,7 +5,7 @@ import electron from "./electron/electron";
 function createWindow() {
     const mainWindow = new BrowserWindow({
         minWidth: 800,
-        minHeight: 900,
+        minHeight: 700,
         webPreferences: {
             preload: path.join(__dirname, "./electron/preload.js"),
         },
